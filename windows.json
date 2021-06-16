@@ -1,0 +1,36 @@
+{
+  "builders": [{
+    "type": "azure-arm",
+    
+    "client_id": "1ec57ac2-3633-4820-9ab4-8301643a8677",
+    "client_secret": "3ozf3Qg7-a6K_8_5v2c3OQhAXjAi5m9J-M",
+    "tenant_id": "aab60564-2f77-4ffa-b286-0892a682104a",
+    "subscription_id": "2d0cd2ff-151f-46ef-bfef-96a8a0c02ac6",
+
+    "managed_image_resource_group_name": "Packer",
+    "managed_image_name": "WINDOWS2019C",
+
+    "os_type": "Windows",
+    "image_publisher": "MicrosoftWindowsServer",
+    "image_offer": "WindowsServer",
+    "image_sku": "2016-Datacenter",
+
+    "communicator": "winrm",
+    "winrm_use_ssl": true,
+    "winrm_insecure": true,
+    "winrm_timeout": "5m",
+    "winrm_username": "packer",
+
+    "azure_tags": {
+        "dept": "Engineering",
+        "task": "Image deployment"
+    },
+
+    "location": "East US",
+    "vm_size": "Standard_D2_v2"
+  }],
+  "provisioners": [{
+    "type": "powershell",
+    "Script": "Execfile.ps1"
+  }]
+}
