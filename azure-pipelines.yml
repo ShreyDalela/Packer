@@ -1,0 +1,77 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+
+
+pool:
+  vmImage: ubuntu-latest
+
+
+parameters: 
+  streams: 
+    - 
+      name: PGW
+      values: 
+        - NONE
+        - INGESTION
+        - DISTRIBUTION
+        - MESSAGING
+        - PGW
+        - SGW
+        - MISC
+    - 
+      name: SGW
+      values: 
+        - NONE
+        - INGESTION
+        - DISTRIBUTION
+        - MESSAGING
+        - PGW
+        - SGW
+        - MISC
+    - 
+      name: SMS
+      values: 
+        - NONE
+        - INGESTION
+        - DISTRIBUTION
+        - MESSAGING
+        - PGW
+        - SGW
+        - MISC
+    - 
+      name: MMS
+      values: 
+        - NONE
+        - INGESTION
+        - DISTRIBUTION
+        - MESSAGING
+        - PGW
+        - SGW
+        - MISC
+    - 
+      name: CIRCLE
+      values: 
+        - NONE
+        - INGESTION
+        - DISTRIBUTION
+        - MESSAGING
+        - PGW
+        - SGW
+        - MISC
+
+
+trigger: none
+
+jobs: 
+- job: object
+  steps:
+    - bash: echo ${{parameters.streams.values[1]}}                     # echo object foo value
+#    - bash: echo ${{parameters.myObject.things[1]}}               # echo one specific string value in array.
+#    - bash: echo ${{parameters.myObject.nested.two}}              # echo nested object value
+#    - ${{ each value in parameters.myObject.things }}:            # echo every string value in array.
+#      - script: echo ${{ value }}
+#    - ${{ each pair in parameters.myObject.nested }}:             # echo every nested object key and value
+#      - script: echo "${{ pair.key }}, ${{ pair.value }}"
