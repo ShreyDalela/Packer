@@ -8,59 +8,74 @@
 pool:
   vmImage: ubuntu-latest
 
+parameters:
+- name: myObject
+  type: object
+  default:
+    foo: FOO
+    bar: BAR
+    things:
+    - one
+    - two
+    - three
+    nested:
+      one: apple
+      two: pear
+      count: 3
 
-parameters: 
-  streams: 
-    - 
-      name: PGW
-      values: 
-        - NONE
-        - INGESTION
-        - DISTRIBUTION
-        - MESSAGING
-        - PGW
-        - SGW
-        - MISC
-    - 
-      name: SGW
-      values: 
-        - NONE
-        - INGESTION
-        - DISTRIBUTION
-        - MESSAGING
-        - PGW
-        - SGW
-        - MISC
-    - 
-      name: SMS
-      values: 
-        - NONE
-        - INGESTION
-        - DISTRIBUTION
-        - MESSAGING
-        - PGW
-        - SGW
-        - MISC
-    - 
-      name: MMS
-      values: 
-        - NONE
-        - INGESTION
-        - DISTRIBUTION
-        - MESSAGING
-        - PGW
-        - SGW
-        - MISC
-    - 
-      name: CIRCLE
-      values: 
-        - NONE
-        - INGESTION
-        - DISTRIBUTION
-        - MESSAGING
-        - PGW
-        - SGW
-        - MISC
+
+#parameters: 
+#  streams: 
+#    - 
+#      name: PGW
+#      values: 
+#        - NONE
+#        - INGESTION
+#        - DISTRIBUTION
+#        - MESSAGING
+#        - PGW
+#        - SGW
+#        - MISC
+#    - 
+#      name: SGW
+#      values: 
+#        - NONE
+#        - INGESTION
+#        - DISTRIBUTION
+#        - MESSAGING
+#        - PGW
+#        - SGW
+#        - MISC
+#    - 
+#      name: SMS
+#      values: 
+#        - NONE
+#        - INGESTION
+#        - DISTRIBUTION
+#        - MESSAGING
+#        - PGW
+#        - SGW
+#        - MISC
+#    - 
+#      name: MMS
+#      values: 
+#        - NONE
+#        - INGESTION
+#        - DISTRIBUTION
+#        - MESSAGING
+#        - PGW
+#        - SGW
+#        - MISC
+#    - 
+#      name: CIRCLE
+#      values: 
+#        - NONE
+#        - INGESTION
+#        - DISTRIBUTION
+#        - MESSAGING
+#        - PGW
+#        - SGW
+#        - MISC
 
 
 trigger: none
@@ -68,10 +83,10 @@ trigger: none
 jobs: 
 - job: object
   steps:
-    - bash: echo ${{parameters.streams.values[1]}}                     # echo object foo value
+#    - bash: echo ${{parameters.streams.values[1]}}                     # echo object foo value
 #    - bash: echo ${{parameters.myObject.things[1]}}               # echo one specific string value in array.
 #    - bash: echo ${{parameters.myObject.nested.two}}              # echo nested object value
 #    - ${{ each value in parameters.myObject.things }}:            # echo every string value in array.
 #      - script: echo ${{ value }}
-#    - ${{ each pair in parameters.myObject.nested }}:             # echo every nested object key and value
-#      - script: echo "${{ pair.key }}, ${{ pair.value }}"
+    - ${{ each pair in parameters.myObject.nested }}:             # echo every nested object key and value
+      - script: echo "${{ pair.key }}, ${{ pair.value }}"
